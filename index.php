@@ -69,7 +69,6 @@ $master = new Master();
 	<script type="text/javascript" src="js/Componer.js"></script>
 	<script type="text/javascript" src="js/Proyectos.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
-	<script type="text/javascript" src="js/style.js"></script>
 
 	<!-- jquery plugins -->
 	<script type="text/javascript" src="js/chosen.jquery.min.js"></script>
@@ -121,8 +120,8 @@ $master = new Master();
 
 <?php
 	//muestra bienvenida una sola ves para cada logueo
-	if(!$_SESSION['bienvenida']){
-		echo '<script type="text/javascript">notifica(\'Hola '.$_SESSION['nombre'].'\')</script>';
+	if(!$_SESSION['cliente_bienvenida']){
+		echo '<script type="text/javascript">notifica(\'Hola '.$_SESSION['cliente_nombre'].'\')</script>';
 		$_SESSION['bienvenida'] = true;
 	}
 ?>
@@ -136,7 +135,7 @@ $master = new Master();
 			<div id="toolbarMenu">
 				<div id="menuUsuario">
 					<?php
-						echo $_SESSION['nombre'];
+						echo $_SESSION['cliente_nombre'];
 					?>
 					<ul class="dropMenu">
 						<?php
@@ -149,7 +148,7 @@ $master = new Master();
 					Proyectos
 					<ul class="dropMenu">
 						<?php
-							//$master->MenuProyectosCliente();
+							$master->MenuProyectos();
 						?>
 					</ul>
 				</div>
@@ -203,9 +202,6 @@ $master = new Master();
 					
 					$master->Proyectos();
 				?>
-					<div id="mensajeInicial">
-						<p>Bienvenido</p>
-					</div>
 				<?php 
 				}
 

@@ -86,18 +86,19 @@ class Master{
 	}
 
 	/**
-	* IMPRIME LOS DATOS DE LA SESSION
-	*/
-	public function ImprimirSession(){
-		echo $_SESSION['nombre'];
-		echo $_SESSION['id'];
-	}
-
-	/**
 	 * MENU DE PROYECTOS
 	 */
 	public function MenuProyectos(){
-		echo '<li onClick="Proyectos()">Proyectos</li>';
+		$proyectos = new Proyectos();
+		$datos = $proyectos->getProyectos($_SESSION['cliente_id']);
+
+		if(!empty($datos)){
+			foreach ($datos as $key => $proyecto) {
+				echo '<li>'.$proyecto['nombre'].'</li>';
+			}
+		}else{
+			echo '<li>No hay proyectos</li>';
+		}
 	}
 
 /************************ PROYECTOS *************/
@@ -107,6 +108,47 @@ class Master{
 	*/
 	public function Proyectos(){
 		$proyectos = new Proyectos();
+		$datos = $proyectos->getProyectos($_SESSION['cliente_id']);
+
+		$lista = '<div class="titulo" >
+					Mis Proyectos
+					<hr>
+				</div>
+					<table class="table-list">';
+
+		if(!empty($datos)){
+			$lista .= '<tr>
+							<td>
+								Nombre
+							</td>
+							<td>
+								Descripcion
+							</td>
+						</tr>';
+
+			foreach ($datos as $key => $proyecto) {
+				$lista .= '<tr class="custom-tooltip" title="../'.$_SESSION['datos'].'/'.$proyecto['imagen'].'" >
+								<td>
+									'.$proyecto['nombre'].'
+								</td>
+								<td>
+									'.base64_decode($proyecto['descripcion']).'
+								</td>
+						   </tr>';
+			}
+
+		}else{
+			$lista .= '<tr>
+						<td colspan="3">
+							No Tienes Proyectos Aun.
+							<br/>
+						</td>
+						</tr>';
+		}
+
+		$lista .= '</table>';
+
+		echo $lista;
 	}
 
 }
