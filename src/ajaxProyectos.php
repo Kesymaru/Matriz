@@ -69,7 +69,7 @@ function CategoriasRoot($proyecto){
 					
 					$lista .= '<li class="" id="'.$categoria.'" onClick="PadreHijos('.$categoria.','.$proyecto.')">';
 
-					$lista .= '<img src="'.$_SESSION['datos'].$datosCategoria[0]['imagen'].'" /><p>'.$datosCategoria[0]['nombre'].'</p>';
+					$lista .= '<img title="'.$datosCategoria[0]['nombre'].'" src="'.$_SESSION['datos'].$datosCategoria[0]['imagen'].'" /><p>'.$datosCategoria[0]['nombre'].'</p>';
 
 					$lista .= '</li>';
 				}

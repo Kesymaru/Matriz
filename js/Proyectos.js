@@ -72,9 +72,10 @@ function PadreHijos(padre, proyecto){
 * CARGA LOS HIJOS DE UN PADRE SELECCIONADO
 */
 function Hijos(padre, proyecto){
+	notifica("cargando "+padre+" "+proyecto );
 
 	//LIMPIA RUTAS DE CATEGORIAS DE HERMANOS
-	LimpiarHermanos(padre, proyecto);
+	//LimpiarHermanos(padre, proyecto);
 
 	var queryParams = {'func' : "Hijos", "padre" : padre, "proyecto" : proyecto};
 
@@ -91,15 +92,20 @@ function Hijos(padre, proyecto){
 
 				$("#subcategorias").append(response);
 
+
 				var totalWidth = 0;
 
-				$('.subcategorias').each(function(index) {
-					totalWidth += parseInt($(this).width(), 10);
+				$("#subcategorias li").each(function(index){
+					+= parseInt($(this).width(), 10);
 				});
-					
-				totalWidth += $("#Padre0").width() + 100;
+				totalWidth += $("#Padre"+padre).width();
 
-				//$("#subcategorias").css('width', totalWidth); //aumenta el tamano del contenedor de categorias
+				$("#subcategorias").animate({
+					"width" : totalWidth
+				},700, function(){
+					$("#subcategorias").css('width', totalWidth);
+				});
+
 			}else{
 				notificaError("Error: "+response);
 			}
