@@ -253,7 +253,8 @@ function SelectNorma(id){
 	$("#"+id).dblclick(function(){
 		Norma(id);
 		return;
-	});*/
+	});
+*/
 }
 
 /**
