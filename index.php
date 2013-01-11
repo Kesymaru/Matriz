@@ -64,10 +64,7 @@ $master = new Master();
 	<script type="text/javascript" src="js/noty/themes/default.js"></script>
 
 	<!-- matriz -->
-	<script type="text/javascript" src="js/Edicion.js"></script>
-	<script type="text/javascript" src="js/Clientes.js"></script>
-	<script type="text/javascript" src="js/Componer.js"></script>
-	<script type="text/javascript" src="js/Proyectos.js"></script>
+		<script type="text/javascript" src="js/Proyectos.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 
 	<!-- jquery plugins -->
@@ -122,7 +119,7 @@ $master = new Master();
 	//muestra bienvenida una sola ves para cada logueo
 	if(!$_SESSION['cliente_bienvenida']){
 		echo '<script type="text/javascript">notifica(\'Hola '.$_SESSION['cliente_nombre'].'\')</script>';
-		$_SESSION['bienvenida'] = true;
+		$_SESSION['cliente_bienvenida'] = true;
 	}
 ?>
 	<!-- header -->
@@ -139,7 +136,7 @@ $master = new Master();
 					?>
 					<ul class="dropMenu">
 						<?php
-							//$master->MenuCliente();
+							$master->MenuCliente();
 						?>
 					</ul>
 				</div>

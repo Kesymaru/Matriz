@@ -9,7 +9,10 @@ $(window).scroll(function () {
 
 
 $(document).ready(function(){
-	
+	$('html, body, div, input, li').bind('cut copy paste', function(event) {
+        event.preventDefault();
+    });
+
 	//tooltips
 	$(document).tooltip({
 		tooltipClass: "arrow",
@@ -53,15 +56,7 @@ $(document).ready(function(){
 	$('.dropMenu button').button();
 	$('.dropMenu').hide();
 
-	$('#proyectos').click(function(){
-		ToolbarMenu('proyectos');
-	});
-
-	$('#clientes').click(function(){
-		ToolbarMenu('clientes');
-	});
-
-	$("#menuProyectos, #menuCliente").click(function(){
+	$("#menuProyectos, #menuUsuario").click(function(){
 		
 		if($(".dropMenu").is(":visible")){
 			$(".dropMenu").slideUp();
@@ -166,7 +161,7 @@ function ActivaMenu(){
 		$("#menu").animate({
 			opacity: 1,
 			//width: 'toggle'
-			width: "30%"
+			width: "10%"
 		}, { 
 			duration: 1500, 
 			queue: false,
@@ -174,24 +169,80 @@ function ActivaMenu(){
 				$("#menu").css({
 					'display' : 'block',
 					'float' : 'left',
+					'min-width' : '50px',
 				});
 			}
 		});
 
 		$("#content").animate({
-	       		width: '60%'
+	       		width: '80%'
 	    	}, { 
 	    		duration: 1500, 
 	    		queue: false,
 	    		complete: function(){
 	    			$("#content").css({
-						'width' : '60%',
+						'width' : '80%',
 						'margin' : '0',
 						'display' : 'inline-block'
 					});
 	    		}
 	    });
 	}	
+}
+
+/*
+* MUESTRA EL SEGUNDO MENU
+*/
+function Menu2(){
+	//OPTIENE EL TAMANO EN PORCENTAJE
+	var w = ( 100 * parseFloat($('#content').css('width')) / parseFloat($('#content').parent().css('width')) ).toFixed() + '%';
+
+	if( w == "80%"){
+		if( !$("#menu2").is(":visible") ){
+			$("#menu2").css({
+				"display"    : "block",
+				"margin-left": "0",
+				"width"      : "0"
+			});
+		}
+
+		//ANIMACION AL AUMENTAR EL TAMANO DEL MENU2
+		$("#content").animate({
+	       width: '50%',
+	    }, { duration: 500, queue: false });
+
+	    $("#menu2").animate({
+	       width: '30%'
+	    }, { 
+	    	duration: 500, 
+	    	queue: false,
+	    	complete: function(){
+	    		$("#menu2").css({
+					"display" : "block",
+					"opacity" : "1"
+				})
+	    	}
+	    });
+
+	}else{
+		//ESCONDE EL SEGUNDO MENU
+		$("#content").animate({
+	       width: '80%'
+	    }, { duration: 500, queue: false });
+
+	    $("#menu2").animate({
+	       width: '0%'
+	    }, { 
+	    	duration: 500, 
+	    	queue: false,
+	    	complete: function(){
+	    		$("#menu2").css({
+					"display": "none",
+					"width"  : "0"
+				})
+	    	}
+	    });
+	}
 }
 
 /**
@@ -464,96 +515,6 @@ function LimpiarContent(){
 		$("#content-disable").remove();
 		$("#content").html("");
 		$("#content").fadeIn();
-	});
-}
-
-
-
-/**
-* FUNCION GENERICA PARA REALIZAR BUSQUEDAS EN EL CONTENT
-*/
-function BuscarContent(id){
-	if($("#"+id).is(":visible")){
-		$("#"+id).slideUp();
-		$("#"+id).val("");
-		$("#menu2 li").fadeIn();
-	}else{
-		$("#"+id).slideDown();
-	}
-	
-	//busqueda en vivo
-	BuscarContentLive(id);
-}
-
-/**
-* BUSQUEDA EN VIVO
-*/
-function BuscarMenuLive(input){
-	//actualiza al ir escribiendo
-	$("#"+input).keyup(function(){
-		var busqueda = $("#"+input).val(), count = 0;
-
-		//recorre opciones para buscar
-        $("#menu li").each(function(){
- 
-            //esconde a los que no coinciden
-            if($(this).text().search(new RegExp(busqueda, "i")) < 0){
-                $(this).fadeOut();
- 
-            //sino lo muestra
-            } else {
-                $(this).show();
-                count++;
-            }
-        });
-	});
-}
-
-/**
-* BUSQUEDA EN VIVO MENU2
-*/
-function BuscarMenu2Live(input){
-	//actualiza al ir escribiendo
-	$("#"+input).keyup(function(){
-		var busqueda = $("#"+input).val(), count = 0;
-
-		//recorre opciones para buscar
-        $("#menu2 li").each(function(){
- 
-            //esconde a los que no coinciden
-            if($(this).text().search(new RegExp(busqueda, "i")) < 0){
-                $(this).fadeOut();
- 
-            //sino lo muestra
-            } else {
-                $(this).show();
-                count++;
-            }
-        });
-	});
-}
-
-/**
-* BUSQUEDA EN VIVO MENU2
-*/
-function BuscarContentLive(input){
-	//actualiza al ir escribiendo
-	$("#"+input).keyup(function(){
-		var busqueda = $("#"+input).val(), count = 0;
-
-		//recorre opciones para buscar
-        $("#content li, #content tr").each(function(){
- 
-            //esconde a los que no coinciden
-            if($(this).text().search(new RegExp(busqueda, "i")) < 0){
-                $(this).fadeOut();
- 
-            //sino lo muestra
-            } else {
-                $(this).show();
-                count++;
-            }
-        });
 	});
 }
 

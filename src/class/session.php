@@ -14,7 +14,7 @@ class Session{
 			session_start();
 			//$_SESSION['home'] = 'http://'.$_SERVER['HTTP_HOST'].'/Consilio';
 			$_SESSION['home'] = '/Matriz';
-			$_SESSION['datos'] = 'matrizescala';
+			$_SESSION['datos'] = '../matrizescala/';
 		}
 
 	}

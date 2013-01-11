@@ -104,9 +104,9 @@ class Registros{
 	* @param $categoria -> id de la categoria
 	* @return $datos[][] -> datos de las normas
 	*/
-	public function getDatos($categoria){
+	public function getCategoriaDatos($categoria){
 		$base = new Database();
-		$query = "SELECT * FROM datos WHERE categoria = ".$categoria;
+		$query = "SELECT * FROM categorias WHERE id = '".$categoria."'";
 
 		$datos = $base->Select($query);
 		

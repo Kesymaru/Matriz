@@ -52,14 +52,13 @@ class Master{
 	* DATOS PARA EL MENU DEL ADMIN
 	*/
 	public function MenuCliente(){
-		$admin = new Admin();
+		$cliente = new Cliente();
 
-		echo '<li onClick="editar();"><img src="';
+		/*echo '<li onClick="editar();"><img src="';
 		echo $admin->getAdminDato("imagen");
-		echo '" /></li>';
+		echo '" /></li>';/*/
 
-		echo '<li><button onClick="EditarAdmin();">Editar</button>';
-		echo '<button onClick="LogOut();">Salir</button></li>';
+		echo '<li onClick="LogOut();">Salir</li>';
 
 	}
 
@@ -94,7 +93,7 @@ class Master{
 
 		if(!empty($datos)){
 			foreach ($datos as $key => $proyecto) {
-				echo '<li>'.$proyecto['nombre'].'</li>';
+				echo '<li onClick="Proyecto('.$proyecto['id'].')">'.$proyecto['nombre'].'</li>';
 			}
 		}else{
 			echo '<li>No hay proyectos</li>';
@@ -127,7 +126,7 @@ class Master{
 						</tr>';
 
 			foreach ($datos as $key => $proyecto) {
-				$lista .= '<tr class="custom-tooltip" title="../'.$_SESSION['datos'].'/'.$proyecto['imagen'].'" >
+				$lista .= '<tr class="custom-tooltip" title="'.$_SESSION['datos'].$proyecto['imagen'].'" >
 								<td>
 									'.$proyecto['nombre'].'
 								</td>

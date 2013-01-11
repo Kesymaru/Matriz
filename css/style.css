@@ -29,6 +29,23 @@ html, body{
 	height: 100%;
 	/*overflow: hidden;*/
 	font-family: 'Open Sans', sans-serif;
+
+	-moz-user-select: none;  
+	-webkit-user-select: none;  
+	-ms-user-select: none;  
+	-o-user-select: none;  
+	user-select: none;
+}
+
+/*
+* CONTRA SELECCION DE TEXTO
+*/
+html, body, input, div, ul, li, a, p{
+	-moz-user-select: none;  
+	-webkit-user-select: none;  
+	-ms-user-select: none;  
+	-o-user-select: none;  
+	user-select: none;
 }
 
 select{
@@ -47,7 +64,21 @@ select{
 /*
 *	MENU
 */
-#menu, #menu2{
+#menu{
+	margin-left: 5%;
+	width: 30%;
+	height: 80%;
+	display: none;
+	float: left;
+	border: 0;
+	margin-right: 0;
+	border: 0px solid transparent;
+	overflow-x: auto !important;
+	overflow-y: auto !important;
+	padding: 0;
+}
+
+#menu2{
 	margin-left: 5%;
 	width: 30%;
 	height: 80%;
@@ -62,9 +93,7 @@ select{
 	padding: 0;
 }
 
-#menu #categorias,
-#menu #articulos,
-#menu #tipos {
+#menu2 #subcategorias{
 	display: block;
 	text-align: center;
 	width: 100%;
@@ -74,26 +103,41 @@ select{
 	z-index: -1;
 }
 
-#menu .categoria, 
-#menu .root{
-	display: table-cell !important;
-	position: relative;
-	float: left;
-	min-width: 150px;
-}
-
-#menu .categoria ul,
-#menu .root ul{
+.categoria ul{
 	display: block;
 	float: left;
 	min-width: 150px;
 }
 
-#menu .normas ul{
+
+#menu .categorias {
 	text-align: center;
 	display: block;
-	min-width: 150px;
-	padding-top: 20px;
+	width: 100%;
+}
+
+#menu .categorias li{
+	list-style: none;
+	border: 0;
+	width: 100%;
+	font-weight: bold;
+	font-size: 20px;
+	cursor: pointer;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+#menu .categorias li img{
+	width: 80% !important;
+	display: block;
+	margin: 0 auto;
+}
+
+.root-selected{
+	background-color: #fff;
+	border-top: 1px solid #dedede;
+	border-left: 1px solid #dedede;
+	border-bottom: 1px solid #dedede;
 }
 
 #menu .categorias-componer ul{
@@ -103,13 +147,7 @@ select{
 	padding-top: 20px;
 }
 
-#menu .categoria ul li,
-#menu .categorias-componer ul li,
-#menu .normas ul li,
-#menu .entidades ul li,
-#menu .tipos ul li,
-#menu .root ul li,
-#menu2 #articulos ul li{
+.categoria ul li,{
 	list-style: none;
 	border: 0;
 	padding: 5px;
@@ -118,12 +156,8 @@ select{
 	cursor: pointer;
 }
 
-#menu .categoria ul li:hover,
-#menu .normas ul li:hover,
-#menu .entidades ul li:hover,
-#menu .tipos ul li:hover,
-#menu .root ul li:hover,
-#menu2 #articulos ul li:hover{
+
+.categoria ul li:hover{
 	background-color: #D5D4D5; /*ie 8*/
 	background-color: rgba(117, 114, 115, .3);
 }
@@ -526,7 +560,7 @@ select{
 	display: inline-block;
 	text-align: center;
 	float: left;
-	width: 120px;
+	min-width: 120px;
 }
 
 #toolbarMenu .seleccionado{
