@@ -308,6 +308,18 @@ function notificaAtencion(text) {
 * NOTIFICACION DE ERRORES
 */
 function notificaError(text) {
+	
+	var queryParams = {"error" : text};
+	$.ajax({
+		data: queryParams,
+		async: false,
+		type: "post",
+		url: "src/class/error.php",
+		success: function(response){
+			text += "<br/>Notifcado al webmaster.";
+		}
+	});
+
   	var n = noty({
   		text: text,
   		type: 'error',
@@ -580,4 +592,20 @@ function BuscarLive(input, target){
             }
         });
 	});
+}
+
+/**
+* DESHABILITA CONTENT
+*/
+function DeshabilitarContent(){
+	//$('#content *').prop('disabled', true);
+	$("#content").prepend('<div class="content-disable"><p><img src="images/ajax_loader_green_128.gif"/></p></div>');
+}
+
+/**
+* HABILITA CONTENT SIN LIMPIARLO
+*/
+function HabilitarContent(){
+	//$('#content *').prop('disabled', false);
+	$(".content-disable").remove();
 }

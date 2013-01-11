@@ -72,10 +72,8 @@ function PadreHijos(padre, proyecto){
 * CARGA LOS HIJOS DE UN PADRE SELECCIONADO
 */
 function Hijos(padre, proyecto){
-	notifica("cargando "+padre+" "+proyecto );
 
-	//LIMPIA RUTAS DE CATEGORIAS DE HERMANOS
-	//LimpiarHermanos(padre, proyecto);
+	//LimpiarHermanos(padre, proyecto);		
 
 	var queryParams = {'func' : "Hijos", "padre" : padre, "proyecto" : proyecto};
 
@@ -96,7 +94,7 @@ function Hijos(padre, proyecto){
 				var totalWidth = 0;
 
 				$("#subcategorias li").each(function(index){
-					+= parseInt($(this).width(), 10);
+					totalWidth += parseInt($(this).width(), 10);
 				});
 				totalWidth += $("#Padre"+padre).width();
 
@@ -215,9 +213,74 @@ function SeleccionaHijo(hijo){
 }
 
 /**
-* CARGA LOS DATOS DE LA CATEGORIA
+* CARGA LAS NORMAS DE LA CATEGORIA
 * @param $id -> id categoria
 */
-function DatosCategoria(id){
+function Categoria(id){
 	$("#content").html("cargando datos de "+id);
+
+	var queryParams = {"func" : "Categoria", "id" : id};
+
+	$.ajax({
+		data: queryParams,
+		type: "post",
+		url: "src/ajaxProyectos.php",
+		beforesend: function(){
+		},
+		success: function(response){
+			notifica(response);
+			if(response.length > 0){
+				$("#content").html(response);
+			}else{
+				notificaError("Error: "+response);
+			}
+			
+		},
+		fail: function(response){
+			notificaError("Error: AJAX fail Proyectos.js Categoria()<br/>"+response);
+		}
+	});
+}
+
+/**
+ * SELECCIONA UNA NORMA
+ */
+function SelectNorma(id){
+	/*$(".datos li").removeClass("seleccionada");
+	$("#"+id).addClass("seleccionada");
+
+	//doble click para mostrar la norma
+	$("#"+id).dblclick(function(){
+		Norma(id);
+		return;
+	});*/
+}
+
+/**
+ * MUESTRA DATOS DE UNA NORMA
+ * @param $id -> id norma
+ */
+function Norma(id){
+
+	var queryParams = {"func" : "Norma", "id" : id};
+
+	$.ajax({
+		data: queryParams,
+		type: "post",
+		url: "src/ajaxProyectos.php",
+		beforesend: function(){
+		},
+		success: function(response){
+			notifica(response);
+			if(response.length > 0){
+				$("#contenido").html(response);
+			}else{
+				notificaError("Error: "+response);
+			}
+			
+		},
+		fail: function(response){
+			notificaError("Error: AJAX fail Proyectos.js Norma()<br/>"+response);
+		}
+	});
 }

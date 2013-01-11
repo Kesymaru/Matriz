@@ -91,7 +91,7 @@ class Registros{
 	*/
 	public function getArchivosArticulo($articulo){
 		$base = new Database();
-		$query = "SELECT * FROM archivos WHERE articulo = ".$articulo;
+		$query = "SELECT * FROM archivos WHERE articulo = '".$articulo."'";
 
 		$datos = $base->Select($query);
 		return $datos;
